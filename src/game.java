@@ -1,10 +1,8 @@
 public class game {
-    //🚩💥🟩🟨
     
     private final char flag = 'F';
     private final char bomb = 'L';
     private final char tile = '?';
-    // private final char checked = 'X';
     
     private final int mineFieldSize = 9;
     
@@ -15,7 +13,6 @@ public class game {
     public game(){
         
         mineGrid = new grid();
-        // mineGrid.printGrid();
         for (int i = 0; i < mineFieldSize; i++){
             for (int b = 0; b < mineFieldSize; b++){
                 gameView[i][b] = tile;
@@ -51,10 +48,6 @@ public class game {
         }
         
     }
-    
-    // public char getGridPoint(int x,int y){
-    //     return gameView[y][x];
-    // }
     
     public void printGameView(){
         System.out.println("   0 1 2 3 4 5 6 7 8 \n");
@@ -111,13 +104,11 @@ public class game {
                     continue;
                 
                 if (((y + h) == y) && ((x + i) == x)){
-                    // System.out.println("testbutbad5");
                     continue;
                 }
                 
                 if (mineGrid.check(x + i, y + h)){
                     temp++;
-                    // System.out.println("testbut2");
                 }
                 
             }

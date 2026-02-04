@@ -7,7 +7,6 @@ public class grid {
     
     private int[][] theGrid = new int[mineFieldSize][mineFieldSize];
     private int test;
-    //
     
     public grid(){
         
