@@ -1,64 +1,76 @@
-import java.util.Scanner;
+import javax.swing.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class App
-{
+public class App extends JFrame implements MouseListener {
     
-    public static void main(String[] args)
-    {
-        //size of minefield (10,10)
-        final int mineFieldSize = 9;
+    private JPanel panel;
+    private game g = new game();
+    // @Override
+    // protected void paintComponent(Graphics g){
         
-        int x;
-        int y;
-        boolean flag;
-        int choice;
-        Scanner input = new Scanner(System.in);
+    //     super.paintComponent(g);
         
-        game g = new game();
         
-        g.printGameView();
-        // while (true){1
-        while (g.lose == false){
+        
+    // }
+    
+    
+    
+    public App() {
+        setTitle("Mouse Click Detector");
+        //size of window
+        setSize(450, 450);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //center the window
+        setLocationRelativeTo(null);
+        
+        panel = new JPanel();
+        //add the MouseListener to the panel
+        panel.addMouseListener(this); 
+        add(panel);
+    }
 
-
-            System.out.println("1. Dig\n2. Flag\n3. Quit \n(Input 1,2, or 3)");
-            choice = input.nextInt();
-            input.nextLine();
-            
-            if (choice == 1) {
-                flag = false;
-            }else if (choice == 2) {
-                flag = true;
-            }else if (choice == 3){
-                break;
-            }else{
-                System.out.println("Invalid Option");
-                continue;
-            }
-            
-            
-            System.out.print("X:" );
-            x = input.nextInt();
-            input.nextLine();
-            
-            System.out.print("Y:" );
-            y = input.nextInt();
-            input.nextLine();
-            
-            if (x < 0 || x > mineFieldSize - 1 || y < 0 || y > mineFieldSize - 1){
-                System.out.println("Invalid Coordinates");
-                continue;
-            }
-            
-            if (flag){
-                g.flag(x,y);
-            } else if (!flag){
-                g.dig(x,y);
-            }
-            
-            System.out.println("---------------------");
-            g.printGameView();
+    public static void main(String[] args) {
+        
+        SwingUtilities.invokeLater(() -> {
+            new MouseClickDetector().setVisible(true);
+        });
+    }
+    
+    
+    
+    
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        int x = e.getX();
+        int y = e.getY();
+        
+        System.out.println("Click at X: " + x + ", Y: " + y);
+        System.out.println("Board Click at X:" + (x / 50) + ", Y: " + (y / 50));
+        
+        if(SwingUtilities.isRightMouseButton(e)){
+            g.flag((x / 50),(y / 50));
+        }else{
+            g.dig((x / 50),(y / 50));
         }
+        g.printGameView();
         
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
     }
 }
