@@ -1,26 +1,43 @@
 import javax.swing.*;
+
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
+class Squares extends JPanel {
+
+    // @Override
+    protected void paintComponent(Graphics g){
+        
+        super.paintComponents(g);
+        
+        Graphics2D g2d = (Graphics2D) g;
+
+        for (int x = 0; x < 9; x++){
+
+            for (int y = 0; y < 9; y++){
+                g.setColor(Color.GREEN);
+                g2d.fillRect(x * 100, y * 100, 99, 99);
+
+            }
+
+        }
+        
+    }
+}
+
 
 public class App extends JFrame implements MouseListener {
     
     private JPanel panel;
     private game g = new game();
-    // @Override
-    // protected void paintComponent(Graphics g){
-        
-    //     super.paintComponent(g);
-        
-        
-        
-    // }
-    
-    
-    
+
     public App() {
-        setTitle("Mouse Click Detector");
+        setTitle("Mine Sweeper");
         //size of window
-        setSize(450, 450);
+        setSize(900, 900);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //center the window
         setLocationRelativeTo(null);
@@ -28,13 +45,15 @@ public class App extends JFrame implements MouseListener {
         panel = new JPanel();
         //add the MouseListener to the panel
         panel.addMouseListener(this); 
+        
         add(panel);
+
     }
 
     public static void main(String[] args) {
         
         SwingUtilities.invokeLater(() -> {
-            new MouseClickDetector().setVisible(true);
+            new App().setVisible(true);
         });
     }
     
@@ -50,9 +69,9 @@ public class App extends JFrame implements MouseListener {
         System.out.println("Board Click at X:" + (x / 50) + ", Y: " + (y / 50));
         
         if(SwingUtilities.isRightMouseButton(e)){
-            g.flag((x / 50),(y / 50));
+            g.flag((x / 100),(y / 100));
         }else{
-            g.dig((x / 50),(y / 50));
+            g.dig((x / 100),(y / 100));
         }
         g.printGameView();
         
