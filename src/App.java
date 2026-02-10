@@ -1,20 +1,19 @@
 import javax.swing.*;
-
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-class Squares extends JPanel {
+class Squares extends JPanel{
 
-    // @Override
+    private JPanel panel;
+
+    @Override
     protected void paintComponent(Graphics g){
         
         super.paintComponents(g);
         
         Graphics2D g2d = (Graphics2D) g;
-
+         
         for (int x = 0; x < 9; x++){
 
             for (int y = 0; y < 9; y++){
@@ -24,28 +23,33 @@ class Squares extends JPanel {
             }
 
         }
-        
+
     }
+
+    public Squares() {
+        
+        panel = new JPanel();
+
+    }
+
 }
 
 
-public class App extends JFrame implements MouseListener {
+public class App extends JFrame implements MouseListener{
     
-    private JPanel panel;
+    Squares panel = new Squares();
     private game g = new game();
 
     public App() {
+
         setTitle("Mine Sweeper");
         //size of window
         setSize(900, 900);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //center the window
         setLocationRelativeTo(null);
-        
-        panel = new JPanel();
         //add the MouseListener to the panel
         panel.addMouseListener(this); 
-        
         add(panel);
 
     }
@@ -56,7 +60,6 @@ public class App extends JFrame implements MouseListener {
             new App().setVisible(true);
         });
     }
-    
     
     
     
@@ -74,7 +77,7 @@ public class App extends JFrame implements MouseListener {
             g.dig((x / 100),(y / 100));
         }
         g.printGameView();
-        
+        repaint();
     }
 
     @Override
@@ -92,4 +95,6 @@ public class App extends JFrame implements MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
     }
+
+
 }
