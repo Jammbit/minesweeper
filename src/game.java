@@ -20,7 +20,12 @@ public class game {
         }
         
     }
-    
+    public char getTile(int x, int y){
+
+        return gameView[x][y];
+
+    }
+
     public void dig(int x, int y){
         if(gameView[y][x] == tile){
             if (mineGrid.check(y,x)){

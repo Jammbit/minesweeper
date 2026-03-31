@@ -6,6 +6,8 @@ import java.awt.event.MouseListener;
 class Squares extends JPanel{
 
     private JPanel panel;
+    private game game = null;
+
 
     @Override
     protected void paintComponent(Graphics g){
@@ -18,6 +20,11 @@ class Squares extends JPanel{
 
             for (int y = 0; y < 9; y++){
                 g.setColor(Color.GREEN);
+                if(game != null){
+                    if(game.getTile(x,y) != '?'){
+                        g.setColor(Color.RED);
+                    }
+                }
                 g2d.fillRect(x * 100, y * 100, 99, 99);
 
             }
@@ -38,13 +45,13 @@ class Squares extends JPanel{
 public class App extends JFrame implements MouseListener{
     
     Squares panel = new Squares();
-    private game g = new game();
+    game = new game();
 
     public App() {
 
         setTitle("Mine Sweeper");
         //size of window
-        setSize(900, 900);
+        setSize(917, 930);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //center the window
         setLocationRelativeTo(null);
@@ -72,11 +79,11 @@ public class App extends JFrame implements MouseListener{
         System.out.println("Board Click at X:" + (x / 50) + ", Y: " + (y / 50));
         
         if(SwingUtilities.isRightMouseButton(e)){
-            g.flag((x / 100),(y / 100));
+            game.flag((x / 100),(y / 100));
         }else{
-            g.dig((x / 100),(y / 100));
+            game.dig((x / 100),(y / 100));
         }
-        g.printGameView();
+        game.printGameView();
         repaint();
     }
 
