@@ -6,9 +6,7 @@ import java.awt.event.MouseListener;
 class Squares extends JPanel{
 
     private JPanel panel;
-    private game game = null;
-
-
+    private game theGame;
     @Override
     protected void paintComponent(Graphics g){
         
@@ -20,12 +18,20 @@ class Squares extends JPanel{
 
             for (int y = 0; y < 9; y++){
                 g.setColor(Color.GREEN);
-                if(game != null){
-                    if(game.getTile(x,y) != '?'){
-                        g.setColor(Color.RED);
-                    }
+                if(theGame.getTile(y,x) != '?' && theGame.getTile(y,x) != 'L'){
+                    g.setColor(Color.LIGHT_GRAY);
+                }else if (theGame.getTile(y,x) == 'L'){
+                    g.setColor(Color.RED);
                 }
                 g2d.fillRect(x * 100, y * 100, 99, 99);
+
+                g.setColor(Color.BLUE);
+                g.setFont(new Font("Serif", Font.BOLD, 50));
+                if(theGame.getTile(y,x) != '?'){
+
+                    g.drawString(Character.toString(theGame.getTile(y,x)), (x * 100) + 35, (y * 100) + 65);
+
+                }
 
             }
 
@@ -33,9 +39,10 @@ class Squares extends JPanel{
 
     }
 
-    public Squares() {
+    public Squares(game g) {
         
         panel = new JPanel();
+        theGame = g;
 
     }
 
@@ -44,8 +51,8 @@ class Squares extends JPanel{
 
 public class App extends JFrame implements MouseListener{
     
-    Squares panel = new Squares();
-    game = new game();
+    game theGame = new game();
+    Squares panel = new Squares(theGame);
 
     public App() {
 
@@ -79,11 +86,11 @@ public class App extends JFrame implements MouseListener{
         System.out.println("Board Click at X:" + (x / 50) + ", Y: " + (y / 50));
         
         if(SwingUtilities.isRightMouseButton(e)){
-            game.flag((x / 100),(y / 100));
+            theGame.flag((x / 100),(y / 100));
         }else{
-            game.dig((x / 100),(y / 100));
+            theGame.dig((x / 100),(y / 100));
         }
-        game.printGameView();
+        theGame.printGameView();
         repaint();
     }
 
