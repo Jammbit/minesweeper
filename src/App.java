@@ -82,16 +82,28 @@ public class App extends JFrame implements MouseListener{
         int x = e.getX();
         int y = e.getY();
         
-        System.out.println("Click at X: " + x + ", Y: " + y);
-        System.out.println("Board Click at X:" + (x / 50) + ", Y: " + (y / 50));
+        // System.out.println("Click at X: " + x + ", Y: " + y);
+        // System.out.println("Board Click at X:" + (x / 50) + ", Y: " + (y / 50));
         
         if(SwingUtilities.isRightMouseButton(e)){
             theGame.flag((x / 100),(y / 100));
         }else{
             theGame.dig((x / 100),(y / 100));
         }
-        theGame.printGameView();
+
+        // theGame.printGameView();
         repaint();
+
+        if (theGame.checkLose()){
+            System.out.println("You Lost.");
+            theGame.printGameView();
+            System.exit(0);
+        }else if(theGame.checkWin()){
+            System.out.println("You Win!");
+            theGame.printGameView();
+            System.exit(0);
+        }
+
     }
 
     @Override

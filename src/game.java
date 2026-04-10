@@ -20,6 +20,7 @@ public class game {
         }
         
     }
+
     public char getTile(int x, int y){
 
         return gameView[x][y];
@@ -53,23 +54,39 @@ public class game {
         }
         
     }
-    
-    public void printGameView(){
-        System.out.println("   0 1 2 3 4 5 6 7 8 \n");
-        for (int i = 0; i < mineFieldSize; i++){
-            System.out.print(i + "  ");
-            
-            for (int b = 0; b < mineFieldSize; b++){
-                
-                System.out.print(gameView[i][b] + " ");
+
+    public boolean checkWin(){
+        int flags = 0;
+
+        for (int y = 0; y < gameView.length; y++){
+            for (int x = 0; x < gameView.length; x++){
+                if (gameView[y][x] == flag){
+                    flags++;
+                }
+                if (gameView[y][x] == tile){
+                    return false;
+                }
             }
-            
-            System.out.println("");
-            
         }
-        
+        if (flags == 10)
+            return true;
+
+        return false;
     }
     
+    public boolean checkLose(){
+
+        for (int y = 0; y < gameView.length; y++){
+            for (int x = 0; x < gameView.length; x++){
+                if (gameView[y][x] == 'L'){
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
     private void zero(int x,int y){
         char bombNum;
         int x2;
@@ -138,5 +155,18 @@ public class game {
         return false;
         
     }
-    
+
+    public void printGameView(){
+        for (int i = 0; i < mineFieldSize; i++){
+            
+            for (int b = 0; b < mineFieldSize; b++){
+                
+                System.out.print(gameView[i][b] + " ");
+            }
+            
+            System.out.println("");
+            
+        }
+        
+    }
 }
