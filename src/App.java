@@ -87,7 +87,7 @@ public class App extends JFrame implements MouseListener{
         
         if(SwingUtilities.isRightMouseButton(e)){
             theGame.flag((x / 100),(y / 100));
-        }else{
+        }else if (theGame.getTile(x / 100, y / 100) == '?'){
             theGame.dig((x / 100),(y / 100));
         }
 

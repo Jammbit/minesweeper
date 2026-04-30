@@ -87,6 +87,33 @@ public class game {
         return false;
     }
 
+    public void clearSurrounding(int x, int y){
+        int flags = 0;
+        for(int i = -1; i <= 1; i++){
+            for (int h = -1; h <= 1; h++){
+                if (i == 0 && h == 0)
+                    continue;
+                if(outOfBounds(x + i, y + h))
+                    continue;
+                if (gameView[x + i][y + h] == flag)
+                    flags++;
+            }
+        }
+        if (gameView[x][y] == (char)(flags + '0')){
+            for(int i = -1; i <= 1; i++){
+                for (int h = -1; h <= 1; h++){
+                    if (i == 0 && h == 0)
+                        continue;
+                    if(outOfBounds(x + i, y + h))
+                        continue;
+                    if (gameView[x + i][y + h] == flag)
+                        continue;
+                    dig(y + i,x + h);
+                }
+            }
+        }
+    }
+
     private void zero(int x,int y){
         char bombNum;
         int x2;
@@ -114,8 +141,7 @@ public class game {
     }
     
     private char bombCheck(int x, int y){
-        int temp = 0;
-        char temp2;
+        int bombs = 0;
         
         for (int i = -1; i < 2; i++){
                 
@@ -130,16 +156,16 @@ public class game {
                 }
                 
                 if (mineGrid.check(x + i, y + h)){
-                    temp++;
+                    bombs++;
                 }
                 
             }
                 
         }
         
-        temp2 = (char)(temp + '0');
+        
             
-        return temp2;
+        return (char)(bombs + '0');
         
     }
 
