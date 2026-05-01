@@ -84,11 +84,14 @@ public class App extends JFrame implements MouseListener{
         
         // System.out.println("Click at X: " + x + ", Y: " + y);
         // System.out.println("Board Click at X:" + (x / 50) + ", Y: " + (y / 50));
-        
+        x = x / 100;
+        y = y / 100;
         if(SwingUtilities.isRightMouseButton(e)){
-            theGame.flag((x / 100),(y / 100));
-        }else if (theGame.getTile(x / 100, y / 100) == '?'){
-            theGame.dig((x / 100),(y / 100));
+            theGame.flag(x,y);
+        }else if (theGame.getTile(x, y) == '?'){
+            theGame.dig(x,y);
+        }else{
+            theGame.clearSurrounding(x, y);
         }
 
         // theGame.printGameView();

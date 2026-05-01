@@ -1,8 +1,8 @@
 public class game {
     
-    private final char flag = 'F';
-    private final char bomb = 'L';
-    private final char tile = '?';
+    private final char FLAG = 'F';
+    private final char BOMB = 'L';
+    private final char TILE = '?';
     
     private final int mineFieldSize = 9;
     
@@ -15,7 +15,7 @@ public class game {
         mineGrid = new grid();
         for (int i = 0; i < mineFieldSize; i++){
             for (int b = 0; b < mineFieldSize; b++){
-                gameView[i][b] = tile;
+                gameView[i][b] = TILE;
             }
         }
         
@@ -28,16 +28,16 @@ public class game {
     }
 
     public void dig(int x, int y){
-        if(gameView[y][x] == tile){
+        if(gameView[y][x] == TILE){
             if (mineGrid.check(y,x)){
-                gameView[y][x] = bomb;
+                gameView[y][x] = BOMB;
                 lose = true;
             }else{
                 zero(y,x);
             }
             
             
-        }else if (gameView[y][x] != tile){
+        }else if (gameView[y][x] != TILE){
             System.out.println("Can't dig in an already dug square!");
         }
         
@@ -45,10 +45,10 @@ public class game {
     
     public void flag(int x, int y){
         
-        if (gameView[y][x] == flag){
-            gameView[y][x] = tile;
-        }else if (gameView[y][x] == tile){
-            gameView[y][x] = flag;
+        if (gameView[y][x] == FLAG){
+            gameView[y][x] = TILE;
+        }else if (gameView[y][x] == TILE){
+            gameView[y][x] = FLAG;
         }else{
             System.out.println("Cannot flag an already dug square!");
         }
@@ -60,10 +60,10 @@ public class game {
 
         for (int y = 0; y < gameView.length; y++){
             for (int x = 0; x < gameView.length; x++){
-                if (gameView[y][x] == flag){
+                if (gameView[y][x] == FLAG){
                     flags++;
                 }
-                if (gameView[y][x] == tile){
+                if (gameView[y][x] == TILE){
                     return false;
                 }
             }
@@ -95,7 +95,7 @@ public class game {
                     continue;
                 if(outOfBounds(x + i, y + h))
                     continue;
-                if (gameView[x + i][y + h] == flag)
+                if (gameView[x + i][y + h] == FLAG)
                     flags++;
             }
         }
@@ -106,7 +106,7 @@ public class game {
                         continue;
                     if(outOfBounds(x + i, y + h))
                         continue;
-                    if (gameView[x + i][y + h] == flag)
+                    if (gameView[x + i][y + h] == FLAG)
                         continue;
                     dig(y + i,x + h);
                 }
@@ -119,7 +119,7 @@ public class game {
         int x2;
         int y2;
         
-        if (outOfBounds(x,y) || (gameView[x][y] != tile))
+        if (outOfBounds(x,y) || (gameView[x][y] != TILE))
             return;
         
         bombNum = bombCheck(x,y);

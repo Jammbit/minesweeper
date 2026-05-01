@@ -1,17 +1,17 @@
 public class grid {
     
     
-    private final int mineFieldSize = 9;
-    private final int mineCount = 10;
+    private final int MINE_FIELD_SIZE = 9;
+    private final int MINE_COUNT = 10;
     
     
-    private int[][] theGrid = new int[mineFieldSize][mineFieldSize];
+    private int[][] theGrid = new int[MINE_FIELD_SIZE][MINE_FIELD_SIZE];
     private int test;
     
     public grid(){
         
-        for (int i = 0; i < mineFieldSize; i++){
-            for (int b = 0; b < mineFieldSize; b++){
+        for (int i = 0; i < MINE_FIELD_SIZE; i++){
+            for (int b = 0; b < MINE_FIELD_SIZE; b++){
                 theGrid[i][b] = 0;
             }
         }
@@ -19,10 +19,10 @@ public class grid {
         int x;
         int y;
         
-        for (int i = 0; i < mineCount; i++){
+        for (int i = 0; i < MINE_COUNT; i++){
             
-            x = ((int) (Math.random() * mineFieldSize));
-            y = ((int) (Math.random() * mineFieldSize));
+            x = ((int) (Math.random() * MINE_FIELD_SIZE));
+            y = ((int) (Math.random() * MINE_FIELD_SIZE));
             
             if (theGrid[x][y] == 0){
                 theGrid[x][y] = 1;
@@ -47,8 +47,8 @@ public class grid {
     //for testing
     public void printGrid(){
         
-        for (int i = 0; i < mineFieldSize; i++){
-            for (int b = 0; b < mineFieldSize; b++){
+        for (int i = 0; i < MINE_FIELD_SIZE; i++){
+            for (int b = 0; b < MINE_FIELD_SIZE; b++){
             
                 System.out.print(theGrid[i][b] + " ");
                 test += theGrid[i][b];
