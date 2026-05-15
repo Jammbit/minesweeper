@@ -36,7 +36,6 @@ public class game {
                 zero(y,x);
             }
             
-            
         }else if (gameView[y][x] != TILE){
             System.out.println("Can't dig in an already dug square!");
         }
@@ -87,32 +86,32 @@ public class game {
         return false;
     }
 
-    public void clearSurrounding(int x, int y){
-        int flags = 0;
-        for(int i = -1; i <= 1; i++){
-            for (int h = -1; h <= 1; h++){
-                if (i == 0 && h == 0)
-                    continue;
-                if(outOfBounds(x + i, y + h))
-                    continue;
-                if (gameView[x + i][y + h] == FLAG)
-                    flags++;
-            }
-        }
-        if (gameView[x][y] == (char)(flags + '0')){
-            for(int i = -1; i <= 1; i++){
-                for (int h = -1; h <= 1; h++){
-                    if (i == 0 && h == 0)
-                        continue;
-                    if(outOfBounds(x + i, y + h))
-                        continue;
-                    if (gameView[x + i][y + h] == FLAG)
-                        continue;
-                    dig(y + i,x + h);
-                }
-            }
-        }
-    }
+    // public void clearSurrounding(int x, int y){
+    //     int flags = 0;
+    //     for(int i = -1; i <= 1; i++){
+    //         for (int h = -1; h <= 1; h++){
+    //             if (i == 0 && h == 0)
+    //                 continue;
+    //             if(outOfBounds(x + i, y + h))
+    //                 continue;
+    //             if (gameView[x + i][y + h] == FLAG)
+    //                 flags++;
+    //         }
+    //     }
+    //     if (gameView[x][y] == (char)(flags + '0')){
+    //         for(int i = -1; i <= 1; i++){
+    //             for (int h = -1; h <= 1; h++){
+    //                 if (i == 0 && h == 0)
+    //                     continue;
+    //                 if(outOfBounds(x + i, y + h))
+    //                     continue;
+    //                 if (gameView[x + i][y + h] == FLAG)
+    //                     continue;
+    //                 dig(y + i,x + h);
+    //             }
+    //         }
+    //     }
+    // }
 
     private void zero(int x,int y){
         char bombNum;
